@@ -23,7 +23,7 @@ const infos = [
     idNumber: 568, 
     author: 'Kevin Smith', 
     photo: 'https://unsplash.it/300/300?image=15', 
-    date: '12-07-2022', 
+    date: '12-07-2021', 
     caption: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia cum nam harum, minima expedita inventore...', 
     likes: 51
 }
@@ -35,11 +35,22 @@ const container = document.getElementById('container');
 let post = '';
 
 for (i=0 ; i < infos.length; i++) {
-    post += `<div class='author'> ${infos[i]['author']} </div>`;
-    post += `<div calss='date'> Posted on ${[infos[i]['date']]}</div>`;
-    post += `<img src="${infos[i]['photo']}" alt="photo${i}" class='post-img'>`
-    post += `<div class="caption">${[infos[i]['caption']]}</div>`;
-    post += `<div class='likes'> Likes: ${[infos[i]['likes']]}</div>`
+    post += 
+    `<div class="header-card">
+     <img src="" alt="" class="profile-picture">
+     <div class="author"> ${infos[i]['author']} </div>
+     <div class="date"> ${[infos[i]['date']]}</div>
+     </div>
+     <div class="center-card">
+     <figure>
+       <img src="${infos[i]['photo']}" alt="photo${i}" class="post-img">
+     </figure>
+     <div class="caption">${[infos[i]['caption']]}</div>
+     </div>
+     <div class="footer-card">
+     <button> Mi piace </button>
+     <div class='likes'> Likes: ${[infos[i]['likes']]}</div>
+     </div>`;
     container.innerHTML += post;
 }
 
