@@ -16,3 +16,30 @@
  Milestone 3
     Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
 */
+
+// creo array  
+const infos = [
+    {
+    idNumber: 568, 
+    author: 'Kevin Smith', 
+    photo: 'https://unsplash.it/300/300?image=15', 
+    date: '12-07-2022', 
+    caption: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia cum nam harum, minima expedita inventore...', 
+    likes: 51
+}
+]
+
+// recupero dal dom
+const container = document.getElementById('container');
+
+let post = '';
+
+for (i=0 ; i < infos.length; i++) {
+    post += `<div class='author'> ${infos[i]['author']} </div>`;
+    post += `<div calss='date'> Posted on ${[infos[i]['date']]}</div>`;
+    post += `<img src="${infos[i]['photo']}" alt="photo${i}" class='post-img'>`
+    post += `<div class="caption">${[infos[i]['caption']]}</div>`;
+    post += `<div class='likes'> Likes: ${[infos[i]['likes']]}</div>`
+    container.innerHTML += post;
+}
+
