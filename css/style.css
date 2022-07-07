@@ -16,86 +16,110 @@ h1 {
     color: white;
 }
 
-
-/* Body */
 .main-title {
     text-align: center;
     margin: 24px 0;
 }
 
-.card {
-    background-color: aliceblue;
-    color: black;
-    width: 55%;
-    margin: 50px auto;
-    padding: 20px;
-    border-radius: 20px;
+.posts-list {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* card header */
-.header-card {
-    display : flex;
-    height: 50px;
-    margin-bottom: 15px;
-    line-height: 290%;
+.posts-list > * {
+    margin-bottom: 24px;
 }
 
-.header-card img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+.post { 
+    padding: 16px;
+    background-color: white;
 }
 
-.author {
-    margin-left: 10px;
+.post__header {
+    margin-bottom: 16px;
+}
+
+.post-meta {
+    display: flex;
+}
+
+.post-meta__icon {
+    margin-right: 24px;
+}
+
+.post-meta__data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.post-meta__author {
     font-weight: bold;
 }
 
-.date {
-    margin-left: 380px;
+.post-meta__time {
+    font-size: 0.8rem;
 }
 
-.caption {
-    margin-bottom: 15px;
-    font-size: 18px;
+.profile-pic {
+    border-radius: 50%;
+    max-width: 60px;
 }
 
-/* card center */
-
-figure img {
-    width: 500px;
-    display:block;
-    margin: 0 auto;
-    margin-bottom: 15px;
-    border : 2.5px solid #023047;
-}
-
-/* card bottom */
-.footer-card {
+.profile-pic-default {
     display: flex;
-    justify-content: space-evenly ;
+    justify-content: center;
     align-items: center;
+    background-color: #0CD977;
+    height: 60px;
+    width: 60px;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
-.footer-card button {
-    border : 1px solid #023047;
-    background-color: #023047;
-    padding: 10px 15px;
-    color: white;
-    border-radius: 15px;
-    font-size: 20px;
+.profile-pic-default span {
+    font-weight: bold;
+    color: #023047;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.post__text {
+    margin-bottom: 16px;
+}
+
+.post__image {
+    margin-bottom: 16px;
+}
+
+.post__image img {
+    width: 100%;
 }
 
 .likes {
-    font-size: 20px;
-    color: #023047;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
+.like-button {
+    display: inline-block;
+    padding: 16px;
+    border-radius: 8px;    
+    text-decoration: none;
+    color: #404040;
+}
 
-/* JS */
+.like-button:not(.like-button--liked):hover {
+    background-color: #e3e3e3
+}
 
-.liked {
-    background-color: white;
-    color: #023047
+.like-button__label {
+    font-weight: bold;
+}
+
+.like-button--liked {
+    color: #0CD977;
+    cursor: default;
 }
