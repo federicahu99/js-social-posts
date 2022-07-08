@@ -19,8 +19,48 @@
 */
 
 // funzioni 
+
+function createPost () {
+  let post = '';
+  post += 
+  `<div class="post">
+      <div class="post__header">
+          <div class="post-meta">
+              <div class="post-meta__icon">
+                  <img class="profile-pic" src="${[infos[i]['picture']]}" alt="${[infos[i]['picture']]}" />
+              </div>
+              <div class="post-meta__data">
+              <div class="post-meta__author">${[infos[i]['author']]}</div>
+              <div class="post-meta__time">${[infos[i]['date']]}</div>
+          </div>
+      </div>
+    </div>
+
+    <div class="post__text">
+      Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint
+      voluptate recusandae architecto. Et nihil ullam aut alias.
+    </div>
+    <div class="post__image">
+      <img src="${[infos[i]['photo']]}" alt="" />
+    </div>
+    <div class="post__footer">
+      <div class="likes js-likes">
+        <div class="likes__cta">
+          <button class="like-button js-like-button" href="#" data-postid="1">
+            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+            <span class="like-button__label">Mi Piace</span>
+          </button>
+        </div>
+      <div class="likes__counter">Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone</div>
+      </div>
+    </div>
+  </div>
+  </div>`;
+  container.innerHTML += post;
+}
+
 function likeAPicture() {
-    newLike = infos.likes++;
+    newLike = ++infos.likes;
     infos.push(newLike);
 }
 
@@ -50,50 +90,16 @@ const infos = [
 // recupero dal dom
 const container = document.getElementById('container');
 
-let post = '';
-
 for (i=0 ; i <= infos.length; i++) {
-    post += 
-    `<div class="post">
-        <div class="post__header">
-            <div class="post-meta">
-                <div class="post-meta__icon">
-                    <img class="profile-pic" src="${[infos[i]['picture']]}" alt="${[infos[i]['picture']]}" />
-                </div>
-                <div class="post-meta__data">
-                <div class="post-meta__author">${[infos[i]['author']]}</div>
-                <div class="post-meta__time">${[infos[i]['date']]}</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="post__text">
-      Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint
-      voluptate recusandae architecto. Et nihil ullam aut alias.
-    </div>
-    <div class="post__image">
-      <img src="${[infos[i]['photo']]}" alt="" />
-    </div>
-    <div class="post__footer">
-      <div class="likes js-likes">
-        <div class="likes__cta">
-          <a class="like-button js-like-button" href="#" data-postid="1">
-            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-            <span class="like-button__label">Mi Piace</span>
-          </a>
-        </div>
-        <div class="likes__counter">Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone</div>
-      </div>
-    </div>
-  </div>
-</div>`;
-    container.innerHTML += post;
+  createPost();
 }
 
 // evento
-const btn = document.getElementById('btn');
-btn.addEventListener('click', (event) => {
-    event.target.classList.toggle('liked');
-    event.target.innerText = 'Piaciuto';
-    likeAPicture()
-})
+const btns = document.querySelectorAll('js-like-button')
+
+for (const bnt of btns) {
+  bnt.addEventListener('click', () => {
+      btn.classList.add('like-button--liked')
+  })
+}
+
