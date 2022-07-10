@@ -20,18 +20,18 @@
 
 // funzioni 
 
-function createPost () {
+function createPost (infos) {
   let post = '';
   post += 
   `<div class="post">
       <div class="post__header">
           <div class="post-meta">
               <div class="post-meta__icon">
-                  <img class="profile-pic" src="${[infos[i]['picture']]}" alt="${[infos[i]['picture']]}" />
+                  <img class="profile-pic" src="${infos['picture']}" alt="${infos['picture']}" />
               </div>
               <div class="post-meta__data">
-              <div class="post-meta__author">${[infos[i]['author']]}</div>
-              <div class="post-meta__time">${[infos[i]['date']]}</div>
+              <div class="post-meta__author">${infos['author']}</div>
+              <div class="post-meta__time">${infos['date']}</div>
           </div>
       </div>
     </div>
@@ -41,17 +41,17 @@ function createPost () {
       voluptate recusandae architecto. Et nihil ullam aut alias.
     </div>
     <div class="post__image">
-      <img src="${[infos[i]['photo']]}" alt="" />
+      <img src="${infos['photo']}" alt="image${infos['id']}/>
     </div>
     <div class="post__footer">
       <div class="likes js-likes">
         <div class="likes__cta">
-          <button class="like-button js-like-button" href="#" data-postid="1">
+          <a class="like-button js-like-button" href="#" data-postid="${infos['id']}">
             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
             <span class="like-button__label">Mi Piace</span>
-          </button>
+          </a>
         </div>
-      <div class="likes__counter">Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone</div>
+      <div class="likes__counter">Piace a <b id="like-counter-${infos['id']}" class="js-likes-counter">${infos['likes']}</b> </div>
       </div>
     </div>
   </div>
@@ -59,15 +59,10 @@ function createPost () {
   container.innerHTML += post;
 }
 
-function likeAPicture() {
-    newLike = ++infos.likes;
-    infos.push(newLike);
-}
-
 // creo array  
 const infos = [
     {
-    idNumber: 568, 
+    id: 568, 
     author: 'Kevin Smith', 
     photo: 'https://unsplash.it/300/300?image=15', 
     picture: 'https://picsum.photos/200/200/?blur',
@@ -77,7 +72,7 @@ const infos = [
     likes: 51
     }, 
     {
-    idNumber: 553, 
+    id: 553, 
     author: 'Lauren Green', 
     picture: 'https://picsum.photos/200/200/?blur',
     photo: 'https://picsum.photos/seed/picsum/500/300', 
@@ -87,19 +82,39 @@ const infos = [
     }
 ]
 
+
 // recupero dal dom
 const container = document.getElementById('container');
 
-for (i=0 ; i <= infos.length; i++) {
-  createPost();
+for (let i=0 ; i < infos.length; i++) {
+  createPost(infos[i]);
+
+  // evento
+  const btns = document.querySelectorAll('.like-button')
+  console.log(btns)
+  
+  for (const bnt of btns) {
+    bnt.addEventListener('click', (event) => {
+
+      //default 
+      event.preventDefault();
+
+      // classe quando è cliccato
+      event.target.classList.toggle('like-button--liked');
+
+      //recupero l'id del post
+       const postId = bnt.dataset.postid;
+       const newLikes = document.getElementById(`like-counter-${postId}`);
+
+      // prendo l'elemento dal dom
+       let likesCounted = parseInt(newLikes.innerText);
+
+       // controllo se è già tra i piaciuti
+       const alreadyLiked= event.target.classList.contains('like-button--liked')
+
+       // aumento
+       newLikes.innerText = alreadyLiked ? ++likesCounted : --likesCounted;
+     })
 }
 
-// evento
-const btns = document.querySelectorAll('js-like-button')
-
-for (const bnt of btns) {
-  bnt.addEventListener('click', () => {
-      btn.classList.add('like-button--liked')
-  })
 }
-
